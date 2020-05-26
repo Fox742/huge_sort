@@ -72,6 +72,7 @@ public:
         return false;
     }
 
+
     bool Finish()
     {
         return begin+pointer>=total;
@@ -124,8 +125,11 @@ public:
         {
             if (!_pools[j]->Finish())
             {
-                minValue=currentValues[j];
-                minIndex=j;
+                if (currentValues[j]<minValue)
+                {
+                    minValue=currentValues[j];
+                    minIndex=j;
+                }
             }
         }
 
@@ -218,32 +222,34 @@ int main(int argc, char* argv[])
         subArrNumber++;
         vecSize = 0;
 
-        delete vec;
-        //----
 
         FilePools * pools = new FilePools(subArrNumber);
         long long TotalNumberOfDoubles=0;
+        std::stringstream str;
         while (!pools->Finish())
         {
 
 
-            if (vecSize>1000)
+            if (vecSize>2000000)
             {
-                std::stringstream str;
+                /*
                 for (int i=0;i<vecSize;i++)
                 {
-                    str <<vec[i]<<std::endl;
+                  str <<vec[i]<<std::endl;
                 }
+                */
 
                 std::ofstream out(fileOut, std::ios::app);
                 out << str.str();
                 out.close();
-
+                str.str(std::string());
                 vecSize = 0;
             }
 
             // Запись числа в выходной файл
-            vec[vecSize]=pools->getNext();
+            //vec[vecSize]=pools->getNext();
+
+            str << pools->getNext()<<std::endl;
             vecSize++;
             TotalNumberOfDoubles++;
             //out<<pools->getNext();
@@ -252,10 +258,11 @@ int main(int argc, char* argv[])
         }
 
         std::ofstream out_finishing(fileOut, std::ios::app);
-        for (int i=0;i<vecSize;i++)
-        {
-            out_finishing << vec[i]<<std::endl;
-        }
+        //for (int i=0;i<vecSize;i++)
+        //{
+        //    out_finishing << vec[i]<<std::endl;
+        //}
+        out_finishing<<str.str();
         out_finishing.close();
 
         delete pools;

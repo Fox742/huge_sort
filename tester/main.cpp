@@ -56,7 +56,7 @@ bool checkSort(std::string path, unsigned int linesAmount)
     ifstream fin(path);
     while (getline(fin,bufer))
     {
-        if (currentLine-lastCheckedLinesPrinted > 500000)
+        if (currentLine-lastCheckedLinesPrinted > 1000)
         {
             Common::ClearScreen();
             std::cout << "Checking order in file:"<<std::endl;
@@ -82,10 +82,12 @@ bool checkSort(std::string path, unsigned int linesAmount)
     return result;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+
 	clock_t start = clock();
     std::string filename = "huge_file_sorted.dat";
+    //std::string filename = "0.dat";
     unsigned int stringAmount = Common::countStrings(filename);
 
 
@@ -93,7 +95,8 @@ int main()
     std::cout << "Number of strings: " << stringAmount <<std::endl;
     */
     bool isSorted = checkSort(filename,stringAmount);
-    Common::ClearScreen();
+    //Common::ClearScreen();
+    std::cout << "argv[0]=" << argv[0]<<std::endl;
     if (isSorted)
     {
         std::cout << "Sorted!"<<std::endl;
