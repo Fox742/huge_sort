@@ -166,15 +166,16 @@ void SortSaveVector(double * vec, int size,int number)
     sort(vec,vec+size);
 
 
-    ofstream ot(to_string(number)+".dat",ios::out|ios::binary);
+    ofstream ot;
+    ot.open(to_string(number)+".dat",std::ios::app|ios::binary);
     ot.write((char*)vec,sizeof(double)*(size+1));
     ot.close();
 }
 
 int main(int argc, char* argv[])
 {
-        string fileIn = "huge_file.dat";
-        string fileOut = "huge_file_sorted.dat";
+        std::string fileIn = "huge_file.dat";
+        std::string fileOut = "huge_file_sorted.dat";
         if (argc)
         {
 
@@ -230,7 +231,8 @@ int main(int argc, char* argv[])
         {
 
 
-            if (vecSize>2000000)
+            //if (vecSize>2000000)
+            if (vecSize>1000)
             {
                 /*
                 for (int i=0;i<vecSize;i++)
@@ -239,9 +241,14 @@ int main(int argc, char* argv[])
                 }
                 */
 
-                std::ofstream out(fileOut, std::ios::app);
+                std::ofstream out;
+                std::cout << "fileOut="<<fileOut<<std::endl;
+                out.open(fileOut, std::ios::app);
+                //out.open("huge_file_sorted.dat", std::ios::app|ios::binary);
+                //out.open("huge_file_sorted.dat", std::ios::app);
                 out << str.str();
                 out.close();
+                //std::cout << "jkdfgnvkjfbn kjzfdbnfdkj"<<std::endl;
                 str.str(std::string());
                 vecSize = 0;
             }
@@ -257,7 +264,8 @@ int main(int argc, char* argv[])
 
         }
 
-        std::ofstream out_finishing(fileOut, std::ios::app);
+        std::ofstream out_finishing;
+        out_finishing.open(fileOut,std::ios::app|ios::binary);
         //for (int i=0;i<vecSize;i++)
         //{
         //    out_finishing << vec[i]<<std::endl;
