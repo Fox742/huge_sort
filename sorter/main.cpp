@@ -27,15 +27,15 @@ private:
     void retrieveDoubles()
     {
         begin = end;
-        if (total - pointer>MemoryLimit)
-        {
+        //if (total - pointer>MemoryLimit)
+        //{
 
             end = begin + MemoryLimit;
-        }
-        else
-        {
-            end = total;
-        }
+        //}
+        //else
+        //{
+            //end = total;
+        //}
         if (begin<end)
         {
             int sx = subfile.readsome(reinterpret_cast<char*>(doubles),(end-begin)*8);
@@ -167,7 +167,7 @@ void SortSaveVector(double * vec, int size,int number)
 
 
     ofstream ot(to_string(number)+".dat",ios::out|ios::binary);
-    ot.write((char*)vec,sizeof(double)*size);
+    ot.write((char*)vec,sizeof(double)*(size+1));
     ot.close();
 }
 
