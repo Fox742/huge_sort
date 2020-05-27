@@ -13,6 +13,16 @@ void Common::ClearScreen()
 #endif
 }
 
+std::string Common::getPercentage( int numerator, int denominator )
+{
+    int resultNumber = 0;
+    if (denominator!=0)
+    {
+        resultNumber = (int)(  ((float)numerator / (float)denominator)*100   );
+    }
+    return to_string(resultNumber)+" %";
+
+}
 
 unsigned int Common::countStrings(std::string path)
 {
@@ -38,4 +48,10 @@ unsigned int Common::countStrings(std::string path)
 
     fin.close();
     return result;
+}
+
+
+std::string Common::intToChunkFilename(unsigned int chunkNumber)
+{
+    return to_string(chunkNumber)+".huge_sort.chunk";
 }

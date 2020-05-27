@@ -4,7 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    PreciseTimer.cpp
+    FilePool.cpp \
+    FilePools.cpp \
+    PreciseTimer.cpp \
+    Sorter.cpp
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../common/release/ -lcommon
@@ -21,7 +24,10 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 else:unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../common/libcommon.a
 
 HEADERS += \
-    PreciseTimer.h
+    FilePool.h \
+    FilePools.h \
+    PreciseTimer.h \
+    Sorter.h
 
 
 
