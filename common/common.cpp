@@ -2,6 +2,12 @@
 #include "iostream"
 #include <fstream>
 
+#if defined(_WIN32)
+#include "windows.h"
+#else
+#include <unistd.h>
+#endif
+
 using namespace std;
 
 void Common::ClearScreen()
@@ -54,4 +60,13 @@ unsigned int Common::countStrings(std::string path)
 std::string Common::intToChunkFilename(unsigned int chunkNumber)
 {
     return to_string(chunkNumber)+".huge_sort.chunk";
+}
+
+void Common::HugeSortSleep(unsigned int msToSleep)
+{
+#if defined(_WIN32)
+    Sleep(msToSleep);
+#else
+    usleep(msToSleep);
+#endif
 }

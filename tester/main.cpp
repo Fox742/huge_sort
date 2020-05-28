@@ -78,6 +78,9 @@ bool checkSort(std::string path, unsigned int linesAmount)
 
     fin.close();
 
+	Common::ClearScreen();
+	std::cout << "Checking order in file:"<<std::endl;
+        std::cout << "Lines passed: " << currentLine << "\t"<< "Total: "<< linesAmount <<std::endl;
 
     return result;
 }

@@ -9,6 +9,7 @@
 #include "FilePools.h"
 #include <string.h>
 #include <sstream>
+#include "common.h"
 
 void Sorter::SortSaveVector(std::vector<double>&chunk, int numberOfCurrentChunk)
 {
@@ -68,6 +69,7 @@ unsigned int Sorter::makeSortedChunks(std::string fileIn, unsigned int doublesAm
     this->SortSaveVector(buffer,chunksAmount);
     chunksAmount++;
     buffer.clear();
+    this->printChunks(lineNumber,chunksAmount,doublesAmount);
     return chunksAmount;
 }
 

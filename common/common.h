@@ -12,5 +12,6 @@ public:
     static unsigned int countStrings(std::string path);
     static std::string getPercentage( int numerator, int denominator );
     static std::string intToChunkFilename(unsigned int chunkNumber);
+    static void HugeSortSleep(unsigned int msToSleep);
 };
 #endif // COMMON_H
