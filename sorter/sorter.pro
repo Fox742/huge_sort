@@ -6,7 +6,6 @@ CONFIG -= qt
 SOURCES += main.cpp \
     FilePool.cpp \
     FilePools.cpp \
-    PreciseTimer.cpp \
     Sorter.cpp
 
 
@@ -26,7 +25,6 @@ else:unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../common/libcommon.a
 HEADERS += \
     FilePool.h \
     FilePools.h \
-    PreciseTimer.h \
     Sorter.h
 
 

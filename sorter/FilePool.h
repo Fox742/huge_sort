@@ -18,6 +18,7 @@ private:
     std::vector<double>doubles;
     unsigned int begin = 0, end = 0, pointer = 0, total = 0;
     ifstream subfile;
+    std::string _fileName;
 
     void retrieveDoubles();
 

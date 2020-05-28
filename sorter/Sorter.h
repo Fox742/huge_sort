@@ -17,12 +17,11 @@ class Sorter
 {
 private:
     unsigned int concatBuferSize = 100000;
-    unsigned int makeSortedChunks(std::string fileIn, unsigned int doublesAmount);
-    void concatChunks(std::string fileOut, unsigned int doublesAmount, unsigned int chunkAmount);
-    void printChunks(unsigned int LinesNumber,unsigned int chunksCreated, unsigned int totalDoublesAmount);
+    unsigned int makeSortedChunks(std::string fileIn, std::string fileOut, unsigned int doublesAmount);
+    void concatChunks(std::string fileIn, std::string fileOut, unsigned int doublesAmount, unsigned int chunkAmount);
+    void printChunks(unsigned int LinesNumber,unsigned int chunksCreated, unsigned int totalDoublesAmount,std::string fileInPath,std::string fileOutPath);
     void SortSaveVector(std::vector<double>&chunk, int numberOfCurrentChunk);
-    //std::string intToChunkFilename(unsigned int chunkNumber);
-    void printSorting(unsigned int LinesNumber, unsigned int totalDoublesAmount);
+    void printSorting(unsigned int LinesNumber, unsigned int totalDoublesAmount,std::string fileInPath,std::string fileOutPath);
 public:
     Sorter(){};
     void Sort(std::string fileIn, std::string fileOut);

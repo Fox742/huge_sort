@@ -11,10 +11,7 @@ FilePools::FilePools(int FilesNumber):/*filesNumber(FilesNumber),*/currentValues
     for (int i=0;i<FilesNumber;i++)
     {
         double nextValue;
-std::cout << "file: "<<i<<std::endl;
         bool finished = _pools[i]->getNext(nextValue);
-std::cout << "<<< file: "<<i<<std::endl;
-	Common::HugeSortSleep(2000);
         if (!finished)
         {
             currentValues[i]=nextValue;

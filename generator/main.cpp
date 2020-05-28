@@ -6,7 +6,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <sstream>
-
+#include "common.h"
+#include "PreciseTimer.h"
 
 using namespace std;
 
@@ -26,7 +27,6 @@ double fRand(double fMin, double fMax)
 bool fileFull(string failName)
 {
     long failSize = GetFileSize(failName);
-    //if (failSize>500)
     if (failSize>1080000000)
         return true;
     return false;
@@ -34,34 +34,28 @@ bool fileFull(string failName)
 
 int main(int argc, char* argv[])
 {
-    string fileName = "huge_file.dat";
-    if (argc)
+    string fileName = "huge_file.txt";
+    if (argc>1)
     {
-
+        fileName = argv[1];
     }
 
 
-    clock_t start = clock();
+    // Стираем старую версию файла
+    if (Common::fileExists(fileName))
+    {
+        Common::Delete(fileName);
+    }
+
+    PreciseTimer timer;
+    timer.start();
     while (!fileFull(fileName))
     {
-        /*
-        std::ofstream out(fileName, std::ios::app);
-        if (out.is_open())
-        {
-            for (int i=0;i<100000;i++)
-            {
-                out << fRand( std::numeric_limits<double>::min(),std::numeric_limits<double>::max() )<<std::endl;
-            }
-        }
-        out.close();
-        */
         std::stringstream sstr;
         for (int i=0;i<500000;i++)
-        //for (int i=0;i<5;i++)
         {
             sstr << fRand( std::numeric_limits<double>::min(),std::numeric_limits<double>::max() )<<std::endl;
         }
-
         std::ofstream out(fileName, std::ios::app);
         if (out.is_open())
         {
@@ -71,15 +65,11 @@ int main(int argc, char* argv[])
 
         long fileSize = GetFileSize(fileName);
 
-        cout << string(50, '\n');
+        Common::ClearScreen();
         cout << "Generating of huge file. Name of the file: ["<<fileName<<"]"<<std::endl;
         cout << "Generated Mbytes: "<<fileSize/1000000<<std::endl;
-        //break;
     }
-
-    clock_t end = clock();
-    double seconds = (double)(end - start) / CLOCKS_PER_SEC;
-    cout<< "Generated!"<< " Minutes were spent: " << seconds/60<<std::endl;
+    cout<< "Generated!"<< " Time was spent: " << timer.stop() <<std::endl;
     cout<< "Press any key to quit"<<std::endl;
     getchar();
     return 0;
