@@ -6,12 +6,8 @@ void FilePool::retrieveDoubles()
     begin = end;
     end = begin + MemoryLimit;
     unsigned int numberAmount = end-begin;
-    //double * array_double = new double[numberAmount];
-    //subfile.readsome((char*)array_double,(numberAmount)*8);
-    //doubles.assign(array_double,array_double+numberAmount);
-    //delete [] array_double;
     doubles.resize(numberAmount);
-    subfile.readsome(reinterpret_cast<char*>(&doubles[0]),(numberAmount)*sizeof (double));
+    subfile.readsome(reinterpret_cast<char*>(&doubles[0]),(numberAmount+1)*sizeof (double));
     pointer = 0;
 }
 

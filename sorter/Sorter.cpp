@@ -15,7 +15,7 @@ void Sorter::SortSaveVector(std::vector<double>&chunk, int numberOfCurrentChunk)
     sort( chunk.begin(),chunk.end() );
     ofstream ot;
     ot.open(Common::intToChunkFilename(numberOfCurrentChunk),std::ios::app|ios::binary);
-    ot.write((char*)&chunk[0],sizeof(double)*(chunk.size()));
+    ot.write((char*)&chunk[0],sizeof(double)*(chunk.size()+1));
     ot.flush();
     ot.close();
 }
@@ -108,6 +108,7 @@ void Sorter::concatChunks(std::string fileOut, unsigned int doublesAmount, unsig
     out << sstr.str();
     out.flush();
     out.close();
+    this->printSorting(totalAmount,doublesAmount);
 }
 
 void Sorter::Sort(std::string fileIn, std::string fileOut)
