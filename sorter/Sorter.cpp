@@ -56,7 +56,7 @@ unsigned int Sorter::makeSortedChunks(std::string fileIn, unsigned int doublesAm
             this->printChunks(lineNumber,chunksAmount,doublesAmount);
             lastLinePrinted = lineNumber;
         }
-        if ( buffer.size() > subvectors_limits )
+        if ( buffer.size() > chunk_size )
         {
             this->SortSaveVector(buffer,chunksAmount);
             chunksAmount++;

@@ -6,6 +6,13 @@
 #include <vector>
 using namespace std;
 
+
+#if defined(_WIN32)
+const int chunk_size=10000000;
+#else
+const int chunk_size=7000000;
+#endif
+
 class Sorter
 {
 private:
