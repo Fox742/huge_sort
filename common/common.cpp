@@ -1,14 +1,48 @@
 #include "common.h"
 #include "iostream"
 #include <fstream>
+#include <sys/types.h> // stat
+#include <sys/stat.h> // stat
 
 #if defined(_WIN32)
 #include "windows.h"
 #else
 #include <unistd.h>
+#include <dirent.h>
+#include <cstring>
 #endif
 
 using namespace std;
+
+bool Common::isDirectory(std::string path)
+{
+#if defined(_WIN32)
+    wstring wpath = wstring(path.begin(), path.end());
+    if (GetFileAttributes(wpath.c_str()) & FILE_ATTRIBUTE_DIRECTORY)
+    {
+        return true;
+    }
+    return false;
+#else
+    struct stat s;
+    if( lstat(path.c_str(),&s) == 0 )
+    {
+        if (S_ISLNK(s.st_mode))
+        {
+            return false;
+        }
+        if( s.st_mode & S_IFDIR )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return false;
+#endif
+}
 
 void Common::ClearScreen()
 {
@@ -171,7 +205,7 @@ BOOL Common::DeleteFolderWindows(LPCWSTR szPath)
     return bRes;
 }
 #else
-void FileSystem::DeleteFolderLinux(const char *dirname)
+void Common::DeleteFolderLinux(const char *dirname)
 {
     DIR *dir;
     struct dirent *entry;

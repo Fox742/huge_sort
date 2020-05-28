@@ -20,6 +20,7 @@ public:
     static bool fileExists(std::string path);
 
 private:
+    static bool isDirectory(std::string path);
 #if defined(_WIN32)
     static BOOL DeleteFolderWindows(LPCWSTR szPath);
 #else
