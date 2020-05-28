@@ -25,5 +25,3 @@ clean:
 	rm -rf generator_exe
 	rm -rf tester_exe
 	rm -rf sorter_exe
-	rm -rf *.huge_sort.chunk
-	rm -rf *.dat
