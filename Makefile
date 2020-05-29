@@ -17,7 +17,7 @@ all:
 	$(COMAND) -c sorter/Chunk.cpp $(INC) -o sorter/obj/Chunk.o
 	$(COMAND) -c sorter/ChunkPool.cpp $(INC) -o sorter/obj/ChunkPool.o
 	$(COMAND) -c sorter/Sorter.cpp $(INC) -o sorter/obj/Sorter.o
-	$(COMAND) sorter/obj/main.o sorter/obj/FilePool.o sorter/obj/FilePools.o sorter/obj/Sorter.o -o sorter_exe common.a
+	$(COMAND) sorter/obj/main.o sorter/obj/Chunk.o sorter/obj/ChunkPool.o sorter/obj/Sorter.o -o sorter_exe common.a
 	
 clean:
 	rm -rf ./*/obj
