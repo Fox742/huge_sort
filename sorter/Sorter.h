@@ -18,7 +18,7 @@ class Sorter
 private:
     unsigned int concatBuferSize = 100000;
     unsigned int makeSortedChunks(std::string fileIn, std::string fileOut, unsigned int doublesAmount);
-    void concatChunks(std::string fileIn, std::string fileOut, unsigned int doublesAmount, unsigned int chunkAmount);
+    void mergeChunks(std::string fileIn, std::string fileOut, unsigned int doublesAmount, unsigned int chunkAmount);
     void printChunks(unsigned int LinesNumber,unsigned int chunksCreated, unsigned int totalDoublesAmount,std::string fileInPath,std::string fileOutPath);
     void SortSaveVector(std::vector<double>&chunk, int numberOfCurrentChunk);
     void printSorting(unsigned int LinesNumber, unsigned int totalDoublesAmount,std::string fileInPath,std::string fileOutPath);

@@ -4,8 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    FilePool.cpp \
-    FilePools.cpp \
+    Chunk.cpp \
+    ChunkPool.cpp \
     Sorter.cpp
 
 
@@ -23,8 +23,8 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 else:unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../common/libcommon.a
 
 HEADERS += \
-    FilePool.h \
-    FilePools.h \
+    Chunk.h \
+    ChunkPool.h \
     Sorter.h
 
 

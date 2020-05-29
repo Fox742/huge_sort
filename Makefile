@@ -14,8 +14,8 @@ all:
 	$(COMAND) -c tester/main.cpp $(INC) -o tester/obj/main.o
 	$(COMAND) tester/obj/main.o -o tester_exe common.a
 	$(COMAND) -c sorter/main.cpp $(INC) -o sorter/obj/main.o
-	$(COMAND) -c sorter/FilePool.cpp $(INC) -o sorter/obj/FilePool.o
-	$(COMAND) -c sorter/FilePools.cpp $(INC) -o sorter/obj/FilePools.o
+	$(COMAND) -c sorter/Chunk.cpp $(INC) -o sorter/obj/Chunk.o
+	$(COMAND) -c sorter/ChunkPool.cpp $(INC) -o sorter/obj/ChunkPool.o
 	$(COMAND) -c sorter/Sorter.cpp $(INC) -o sorter/obj/Sorter.o
 	$(COMAND) sorter/obj/main.o sorter/obj/FilePool.o sorter/obj/FilePools.o sorter/obj/Sorter.o -o sorter_exe common.a
 	

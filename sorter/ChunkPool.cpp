@@ -1,12 +1,12 @@
-#include "FilePools.h"
+#include "ChunkPool.h"
 #include "common.h"
 
-FilePools::FilePools(int FilesNumber):/*filesNumber(FilesNumber),*/currentValues(std::vector<double>(FilesNumber,0.0))
+ChunkPool::ChunkPool(int FilesNumber):/*filesNumber(FilesNumber),*/currentValues(std::vector<double>(FilesNumber,0.0))
 {
     for (int i=0;i<FilesNumber;i++)
     {
 	
-        _pools.push_back( shared_ptr<FilePool>(new FilePool(i,subvectors_limits/FilesNumber)) );
+        _pools.push_back( shared_ptr<Chunk>(new Chunk(i,subvectors_limits/FilesNumber)) );
     }
     for (int i=0;i<FilesNumber;i++)
     {
@@ -19,9 +19,10 @@ FilePools::FilePools(int FilesNumber):/*filesNumber(FilesNumber),*/currentValues
     }
 }
 
-double FilePools::getNext()
+double ChunkPool::getNext()
 {
     unsigned int currentPool;
+    // Проходим по массиву чанков до первого чанка, в котором ещё остались значения
     for (currentPool=0;currentPool<_pools.size();currentPool++)
     {
         if (!_pools[currentPool]->Finish())
@@ -30,6 +31,7 @@ double FilePools::getNext()
         }
     }
 
+    // Находим минимальное из текущих значений всех чанков
     int minIndex = currentPool;
     double minValue =currentValues[currentPool];
 
@@ -45,6 +47,8 @@ double FilePools::getNext()
         }
     }
 
+    // Сохраняем минимальное значение (чтобы его вернуть клиентскому коду)
+    //   И чанку, у которого мы взяли значение - вызываем getNext, чтобы взять его следующее значение и положить в буфер currentValues
     double nextVal = 0;
     _pools[minIndex]->getNext(nextVal);
     currentValues[minIndex]=nextVal;
@@ -53,7 +57,7 @@ double FilePools::getNext()
 
 }
 
-bool FilePools::Finish()
+bool ChunkPool::Finish()
 {
     for (unsigned int i=0;i<_pools.size();i++)
         if (!_pools[i]->Finish())

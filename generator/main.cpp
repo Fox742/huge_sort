@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
     }
 
 
-    // Стираем старую версию файла
+    // Стираем старую версию файла если она есть
     if (Common::fileExists(fileName))
     {
         Common::Delete(fileName);
@@ -49,9 +49,10 @@ int main(int argc, char* argv[])
 
     PreciseTimer timer;
     timer.start();
-    while (!fileFull(fileName))
+    while (!fileFull(fileName)) // Пока файл меньше необходимого размера
     {
-        std::stringstream sstr;
+        std::stringstream sstr; // Добавляем в строку сгенерированное случайно число (делается для обптимизации).
+                                //             (Записать в файл одной строки занимает меньше времени, чем запись большого количества коротких строк)
         for (int i=0;i<500000;i++)
         {
             sstr << fRand( std::numeric_limits<double>::min(),std::numeric_limits<double>::max() )<<std::endl;

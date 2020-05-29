@@ -30,13 +30,17 @@ bool checkSort(std::string path, unsigned int linesAmount)
     }
     while (getline(fin,bufer))
     {
+        // Выводим состояние после каждой обработанной тысячи строк
         if (currentLine-lastCheckedLinesPrinted > 1000)
         {
             printCheckStatus(currentLine,linesAmount,path);
             lastCheckedLinesPrinted = currentLine;
         }
 
+        // atof - существенно быстрее оператора "fin >>currentNumber"
         double currentNumber = atof(bufer.c_str());
+
+        // Проверка меньше ли текущее значение предыдущего. Если нарушение этого правила - то сортировка нарушена
         if (currentLine)
         {
             if (currentNumber < previousChecked)
@@ -67,8 +71,9 @@ int main(int argc, char* argv[])
     timer.start();
     try
     {
+        // Сначала посчитаем строки, чтобы потом показывать процент сколько строк мы обработали
         unsigned int stringAmount = Common::countStrings(filename);
-        if (!stringAmount)
+        if (!stringAmount) // Нет строк - нет смысла говорить о том отсортирован ли файл
         {
             std::cout << "File empty"<<std::endl;
         }
